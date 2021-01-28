@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->decimal('height', 2);
-            $table->decimal('weight', 2);
+            $table->integer('height');
+            $table->decimal('weight');
             $table->rememberToken();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();

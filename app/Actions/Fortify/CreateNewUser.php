@@ -24,14 +24,16 @@ class CreateNewUser implements CreatesNewUsers
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
-            'height' => ['required', 'number', 'max:255'],
-            'weight' => ['required', 'number', 'max:255'],
+            'height' => ['required'],
+            'weight' => ['required'],
         ])->validate();
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'height' => $input['height'],
+            'weight' => $input['weight']
         ]);
     }
 }

@@ -100,19 +100,18 @@
 <script>
 import { RegisterContainer } from "../styles/Register.js";
 import LineStep from "../../components/LineStep/LineStep";
-import axios from "axios";
 
 export default {
   data() {
     return {
-      form: {
+      form: this.$inertia.form({
         name: "",
         email: "",
         password: "",
+        password_confirmation: "",
         height: 0,
         weight: 0,
-        password_confirmation: "",
-      },
+      }),
       step: 1,
       message: false,
     };
@@ -123,7 +122,10 @@ export default {
   },
   methods: {
     finish() {
-        axios.post(this.route('register'), this.form).then(res => console.log(res)).catch(err => console.log(err));
+        console.log(this.form.password)
+        this.form.post(this.route('register'), {
+            onFinish: () => this.form.reset('password', 'password_confirmation'),
+        })
     },
     submit() {
       if (this.form.password !== this.form.password_confirmation) {
